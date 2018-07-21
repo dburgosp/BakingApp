@@ -19,6 +19,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".data.RecipesProvider"
+            android:authorities="com.davidburgosprieto.android.bakingapp"
+            android:exported="false" />
+
+        <activity android:name=".RecipesActivity" />
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName="com.davidburgosprieto.android.bakingapp.RecipesActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidburgosprieto.android.bakingapp.RecipesActivity" />
+        </activity>
+        <activity
+            android:name=".StepActivity"
+            android:parentActivityName="com.davidburgosprieto.android.bakingapp.DetailActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidburgosprieto.android.bakingapp.DetailActivity" />
+        </activity>
     </application>
 
 </manifest>

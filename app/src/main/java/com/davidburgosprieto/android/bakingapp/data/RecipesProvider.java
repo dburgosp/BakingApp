@@ -294,7 +294,8 @@ public class RecipesProvider extends ContentProvider {
          * passing "1" for the selection will delete all rows and return the number of rows
          * deleted, which is what the caller of this method expects.
          */
-        if (null == selection) selection = "1";
+        if (null == selection)
+            selection = "1";
 
         String table;
         int match = sUriMatcher.match(uri);

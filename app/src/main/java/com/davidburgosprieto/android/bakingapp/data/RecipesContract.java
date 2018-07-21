@@ -69,7 +69,7 @@ public class RecipesContract {
                 .build();
 
         /* Used internally as the name of our recipe ingredients table. */
-        public static final String TABLE_NAME = "step";
+        public static final String TABLE_NAME = "ingredient";
 
         // Table fields.
         public static final String COLUMN_RECIPE_ID = "recipeId";

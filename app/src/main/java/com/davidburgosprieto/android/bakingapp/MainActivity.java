@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.davidburgosprieto.android.bakingapp.asynctaskloaders.RecipesAsyncTaskLoader;
 import com.davidburgosprieto.android.bakingapp.classes.Recipe;
 import com.davidburgosprieto.android.bakingapp.data.RecipesContract;
-import com.davidburgosprieto.android.bakingapp.databinding.ActivityMainBinding;
+import com.davidburgosprieto.android.bakingapp.utilities.LoadersUtils;
 import com.davidburgosprieto.android.bakingapp.utilities.NetworkUtils;
 import com.davidburgosprieto.android.bakingapp.utilities.RecipesJsonUtils;
 
@@ -35,19 +35,13 @@ public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<ArrayList<Recipe>> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final int RECIPES_FROM_INTERNET_LOADER_ID = 1;
-    private static final int RECIPES_TO_DATABASE_LOADER_ID = 2;
-
     ArrayList<Recipe> recipeArrayList;
-
-    // Required for Data Binding library.
-    ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportLoaderManager().initLoader(RECIPES_FROM_INTERNET_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(LoadersUtils.RECIPES_FROM_INTERNET_LOADER_ID, null, this);
     }
 
     @Override
@@ -85,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
         public recipesToDatabase(ArrayList<Recipe> recipeArrayList) {
             mRecipeArrayList = recipeArrayList;
-            getSupportLoaderManager().initLoader(RECIPES_TO_DATABASE_LOADER_ID, null, this);
+            getSupportLoaderManager().initLoader(LoadersUtils.RECIPES_TO_DATABASE_LOADER_ID, null, this);
         }
 
         @Override
@@ -103,7 +97,8 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+            Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+            startActivity(intent);
         }
 
         @Override

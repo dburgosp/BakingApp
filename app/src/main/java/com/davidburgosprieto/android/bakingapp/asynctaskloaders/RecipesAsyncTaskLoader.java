@@ -153,9 +153,9 @@ public class RecipesAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Recipe>> {
         ContentValues[] recipeContentValues = new ContentValues[data.size()];
         for (int i = 0; i < data.size(); i++) {
             ContentValues contentValues = new ContentValues();
+            contentValues.put(RecipesContract.RecipesEntry.COLUMN_RECIPE_ID, data.get(i).getmId());
             contentValues.put(RecipesContract.RecipesEntry.COLUMN_IMAGE, data.get(i).getmImage());
             contentValues.put(RecipesContract.RecipesEntry.COLUMN_NAME, data.get(i).getmName());
-            contentValues.put(RecipesContract.RecipesEntry.COLUMN_RECIPE_ID, data.get(i).getmId());
             contentValues.put(RecipesContract.RecipesEntry.COLUMN_SERVINGS, data.get(i).getmServings());
             recipeContentValues[i] = contentValues;
         }
@@ -179,9 +179,9 @@ public class RecipesAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Recipe>> {
         ContentValues[] stepContentValues = new ContentValues[data.size()];
         for (int i = 0; i < data.size(); i++) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(RecipesContract.StepsEntry.COLUMN_DESCRIPTION, data.get(i).getmDescription());
-            contentValues.put(RecipesContract.StepsEntry.COLUMN_RECIPE_ID, recipeId);
             contentValues.put(RecipesContract.StepsEntry.COLUMN_STEP_ID, data.get(i).getmId());
+            contentValues.put(RecipesContract.StepsEntry.COLUMN_RECIPE_ID, recipeId);
+            contentValues.put(RecipesContract.StepsEntry.COLUMN_DESCRIPTION, data.get(i).getmDescription());
             contentValues.put(RecipesContract.StepsEntry.COLUMN_SHORT_DESCRIPTION, data.get(i).getmShortDescription());
             contentValues.put(RecipesContract.StepsEntry.COLUMN_THUMBNAIL_URL, data.get(i).getmThumbnailURL());
             contentValues.put(RecipesContract.StepsEntry.COLUMN_VIDEO_URL, data.get(i).getmVideoURL());
