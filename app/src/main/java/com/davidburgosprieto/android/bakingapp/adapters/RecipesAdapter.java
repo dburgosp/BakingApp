@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davidburgosprieto.android.bakingapp.DetailActivity;
@@ -43,13 +42,17 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
     public void onBindViewHolder(RecipesAdapterViewHolder holder, int position) {
         mCursor.moveToPosition(position);
 
-        int recipeId = mCursor.getInt(RecipesActivity.INDEX_COLUMN_RECIPE_ID);
-        int servings = mCursor.getInt(RecipesActivity.INDEX_COLUMN_SERVINGS);
-        String recipeName = mCursor.getString(RecipesActivity.INDEX_COLUMN_NAME);
+        int mRecipeId = mCursor.getInt(RecipesActivity.INDEX_COLUMN_RECIPE_ID);
+        int mServings = mCursor.getInt(RecipesActivity.INDEX_COLUMN_SERVINGS);
+        String mRecipeName = mCursor.getString(RecipesActivity.INDEX_COLUMN_NAME);
 
-        holder.recipeName.setText(recipeName);
-        holder.recipeNumber.setText(Integer.toString(recipeId));
-        holder.recipeServings.setText(Integer.toString(servings));
+        holder.mRecipeId = mRecipeId;
+        holder.mServings = mServings;
+        holder.mRecipeName = mRecipeName;
+
+        holder.mRecipeNameTextView.setText(mRecipeName);
+        holder.mRecipeNumberTextView.setText(Integer.toString(mRecipeId));
+        holder.mRecipeServingsTextView.setText(Integer.toString(mServings));
     }
 
     @Override
@@ -61,20 +64,23 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
 
     public class RecipesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.list_item_recipe_name_textview)
-        TextView recipeName;
+        TextView mRecipeNameTextView;
         @BindView(R.id.list_item_recipe_number_textview)
-        TextView recipeNumber;
+        TextView mRecipeNumberTextView;
         @BindView(R.id.list_item_recipe_servings_textview)
-        TextView recipeServings;
+        TextView mRecipeServingsTextView;
+
+        int mRecipeId, mServings;
+        String mRecipeName;
 
         RecipesAdapterViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
 
             // Butterknife fails for some reason...
-            recipeName = view.findViewById(R.id.list_item_recipe_name_textview);
-            recipeNumber = view.findViewById(R.id.list_item_recipe_number_textview);
-            recipeServings = view.findViewById(R.id.list_item_recipe_servings_textview);
+            mRecipeNameTextView = view.findViewById(R.id.list_item_recipe_name_textview);
+            mRecipeNumberTextView = view.findViewById(R.id.list_item_recipe_number_textview);
+            mRecipeServingsTextView = view.findViewById(R.id.list_item_recipe_servings_textview);
 
             view.setOnClickListener(this);
         }
@@ -88,14 +94,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
          */
         @Override
         public void onClick(View v) {
- /*           int adapterPosition = getAdapterPosition();
-            mCursor.moveToPosition(adapterPosition);
-            long dateInMillis = mCursor.getLong(MainActivity.INDEX_WEATHER_DATE);
-            mClickHandler.onClick(dateInMillis);*/
             Intent intent = new Intent(mContext, DetailActivity.class);
-            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, Integer.valueOf(recipeNumber.getText().toString()));
-            intent.putExtra(DetailActivity.EXTRA_RECIPE_NAME, recipeName.getText());
-            intent.putExtra(DetailActivity.EXTRA_RECIPE_SERVINGS, Integer.valueOf(recipeServings.getText().toString()));
+            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, Integer.toString(mRecipeId));
+            intent.putExtra(DetailActivity.EXTRA_RECIPE_NAME, mRecipeName);
+            intent.putExtra(DetailActivity.EXTRA_RECIPE_SERVINGS, Integer.toString(mServings));
             mContext.startActivity(intent);
         }
     }

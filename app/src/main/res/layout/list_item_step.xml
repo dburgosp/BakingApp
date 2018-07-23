@@ -24,24 +24,12 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/list_item_step_number_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Step #"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/list_item_step_number_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                tools:text="1" />
-        </LinearLayout>
+            android:textColor="#ffffff"
+            tools:text="Step #1" />
 
         <TextView
             android:id="@+id/list_item_step_short_description_textview"
